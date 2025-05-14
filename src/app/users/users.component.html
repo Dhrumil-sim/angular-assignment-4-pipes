@@ -1,0 +1,71 @@
+<div class="container mx-auto p-6">
+  <h1 class="text-4xl font-extrabold mb-8 text-center text-gray-800">Users List</h1>
+
+  <div *ngIf="users$ | async as users; else loading">
+    <div class="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div
+        *ngFor="let user of users"
+        class="bg-gradient-to-br from-white to-gray-50 shadow-lg rounded-xl p-6 transition-transform transform hover:scale-105"
+      >
+        <!-- Avatar -->
+        <div class="flex justify-center mb-4">
+          <img
+            [src]="getAvatarUrl(user.name)"
+            alt="{{ user.name }}"
+            class="w-20 h-20 rounded-full ring-4 ring-blue-500"
+          />
+        </div>
+
+        <!-- User Info -->
+        <div class="text-center">
+          <h2 class="text-2xl font-semibold text-gray-800">{{ user.name }}</h2>
+          <p class="text-gray-500">{{ user.username }}</p>
+
+          <p class="text-gray-600 mt-2 flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M2.94 6.94a1.5 1.5 0 012.12 0L10 11.88l4.94-4.94a1.5 1.5 0 112.12 2.12l-6 6a1.5 1.5 0 01-2.12 0l-6-6a1.5 1.5 0 010-2.12z"
+              />
+            </svg>
+            {{ user.email }}
+          </p>
+
+          <p class="text-gray-600 mt-1 flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M2 5a2 2 0 012-2h12a2 2 0 012 2v1H2V5zM2 8h16v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8z"
+              />
+            </svg>
+            {{ user.website }}
+          </p>
+
+          <p class="text-gray-600 mt-1 flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2 text-purple-500" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 2a6 6 0 00-6 6c0 4.418 6 10 6 10s6-5.582 6-10a6 6 0 00-6-6zM8 8a2 2 0 114 0 2 2 0 01-4 0z"
+              />
+            </svg>
+            {{ user.address.city }}
+          </p>
+
+          <p class="text-gray-600 mt-1 flex items-center justify-center">
+            <svg class="w-5 h-5 mr-2 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M2 3a1 1 0 011-1h3.586a1 1 0 01.707.293l1.414 1.414A1 1 0 009.414 4H17a1 1 0 011 1v11a1 1 0 01-1 1H3a1 1 0 01-1-1V3z"
+              />
+            </svg>
+            <span class="font-bold">Phone:</span> {{ user.phone | maskPhone }}
+          </p>
+        </div>
+        <!-- ✅ Closing user info div -->
+      </div>
+      <!-- ✅ Closing user card div -->
+    </div>
+    <!-- ✅ Closing grid div -->
+  </div>
+  <!-- ✅ Closing *ngIf block -->
+
+  <ng-template #loading>
+    <p class="text-center text-xl text-gray-500">Loading users...</p>
+  </ng-template>
+</div>
